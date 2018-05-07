@@ -78,10 +78,14 @@
 * 
 * yarn add browser-cookies
 
+### socket.io
+* yarn add socket.io
+* yarn add socket.io-client
+
 # 高阶组件
 * @装饰器
 * 作用：属性代理，反向继承
 
-### socket.io
-* yarn add socket.io
-* yarn add socket.io-client
+# react
+* this.setState()  //state中，包含队列的概念(当多个state改变时，render执行一次)，所以更新用setstate，而不是赋值。
+* render中不要setstate，否则有死循环的风险
