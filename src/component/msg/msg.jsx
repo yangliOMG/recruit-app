@@ -1,6 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {List, Badge} from 'antd-mobile'
+import QueueAnim from 'rc-queue-anim';
+
 // import browserCookie from 'browser-cookies'
 // import {Redirect} from 'react-router-dom'
 // import {logoutSubmit} from '../../redux/user.redux.jsx'
@@ -33,6 +35,7 @@ class Msg extends React.Component{
         })
         return (
             <div>
+                <QueueAnim type="left" duration="500">
                 {chatList.map(v=>{
                     const lastItem = this.getLast(v)
                     const targetId = v[0].from === userid?v[0].to:v[0].from 
@@ -55,7 +58,7 @@ class Msg extends React.Component{
                         </List.Item>
                     </List>)
                 })}
-                
+                </QueueAnim>
             </div>
         )
     }

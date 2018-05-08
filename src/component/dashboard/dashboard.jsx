@@ -1,7 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {NavBar} from 'antd-mobile'
-import {Switch, Route} from 'react-router-dom' 
+import { Route, Redirect} from 'react-router-dom' 
+import QueueAnim from 'rc-queue-anim';
 
 
 import NavLinkBar from '../navlink/navlink'
@@ -38,42 +39,48 @@ class Dashboard extends React.Component{
                 icon:'boss',
                 title:'牛人列表',
                 component:Genius,
-                hide:user.type==='genuis'
+                hide:user.type==='genuis',
+                type:'left'
             },{
                 path:'/boss',
                 text:'boss',
                 icon:'job',
                 title:'BOSS列表',
                 component:Boss,
-                hide:user.type==='boss'
+                hide:user.type==='boss',
+                type:'left'
             },{
                 path:'/msg',
                 text:'消息',
                 icon:'msg',
                 title:'消息列表',
                 component:Msg,
+                type:'alpha'
             },{
                 path:'/me',
                 text:'我',
                 icon:'user',
                 title:'个人中心',
                 component:User,
+                type:'right'
             }
         ]
-        return (
+        const page = navList.find(v=>v.path===pathname)
+        return page?(
             <div>
-                <NavBar className='fixd-header' mode='dard'>{navList.find(v=>v.path===pathname).title}</NavBar>
+                <NavBar className='fixd-header' mode='dard'>{page.title}</NavBar>
                 <div style={{marginTop:45}}>
-                    <Switch>
-                        {navList.map(v=>
-                            <Route key={v.path} path={v.path} component={v.component}></Route>
-                        )}
-                    </Switch>
+                    <QueueAnim type={page.type}>
+                        {/* <Switch>
+                            {navList.map(v=> */}
+                                <Route key={page.path} path={page.path} component={page.component}></Route>
+                            {/* )}
+                        </Switch> */}
+                    </QueueAnim>
                 </div>
                 <NavLinkBar data={navList}></NavLinkBar>
             </div>
-
-        )
+        ): <Redirect to='/msg'></Redirect>
     }
 }
 

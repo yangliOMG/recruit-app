@@ -1,6 +1,5 @@
 import axios from "axios";
 import io from 'socket.io-client'
-import { stat } from "fs";
 
 const socket = io('ws://localhost:9093')
 
@@ -53,15 +52,22 @@ export function getMsgList(type){
     }
 }
 export function readMsg(from){
-    return (dispatch,getState)=>{
-        axios.post('/user/readmsg',{from})
-        .then(res=>{
-            if(res.status===200&&res.data.code===0){
-                const userid = getState().user._id
-                dispatch(msgRead(userid,from, res.data.num))
-            }
-        })
+    return async (dispatch,getState)=>{
+        const res = await axios.post('/user/readmsg',{from})
+        if(res.status===200&&res.data.code===0){
+            const userid = getState().user._id
+            dispatch(msgRead(userid,from, res.data.num))
+        }
     }
+    // return (dispatch,getState)=>{
+    //     axios.post('/user/readmsg',{from})
+    //     .then(res=>{
+    //         if(res.status===200&&res.data.code===0){
+    //             const userid = getState().user._id
+    //             dispatch(msgRead(userid,from, res.data.num))
+    //         }
+    //     })
+    // }
 }
 export function recvMsg(){
     return (dispatch,getState)=>{
