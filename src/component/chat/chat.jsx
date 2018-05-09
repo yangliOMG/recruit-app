@@ -65,7 +65,7 @@ class Chat extends React.Component{
                 >
                     {users[userid].name}
                 </NavBar >
-                <QueueAnim type="left">
+                <QueueAnim type="left" className="abs">
                     {chatmsgs.map(v=>{
                         const avatar = require(`../img/${users[v.from].avatar}.png`)
                         return v.from === userid?(

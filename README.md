@@ -111,14 +111,31 @@ class Paren extends React.Component{
     }
 }
 ```
+* 遍历的key最好用id等唯一字段，用index的话，如果数组的位置发生变化，则react会视为所有值发生改变，会重新渲染所有数组
+* eslint校验配置。修改package.json（eslint官网，规则http://eslint.cn/docs/rules/）
+```
+"eslintConfig": {
+    "extends": "react-app",
+    "rules":{
+      "no-console":[1]
+    }
+},
+```
+* async await=>chat.redux.jsx  function readMsg()
+* 动画ant Motion=>(https://motion.ant.design/api/queue-anim)
 
 ### 高阶组件
 * @装饰器
 * 作用：属性代理，反向继承
+
 ### redux实现
+
 ### react-redux实现
+
 ### redux-thunk实现
+
 ### redux-arrayThunk实现
+
 ### react性能优化
 * 构造函数的优化选择
 ```
@@ -169,6 +186,24 @@ const numSelector = createSelector(
   {。。。} 
 )
 ```
+### 打包编译
+* npm run build
+* 修改server.js
+```
+app.use(function(req, res, next){                   把不是/user(接口)，不是/static(静态资源)，都映射到index.html
+    if(req.url.startsWith('/user/') || req.url.startsWith('/static')){
+        return next()
+    }
+    return res.sendFile(path.resolve('build/index.html'))
+})
+app.use('/',express.static(path.resolve('build')))
+```
+* 上线：购买域名。dns解析服务器ip。安装nginx。用pm2管理node进程。
+
+# 服务端渲染-ssr
+* 传统服务端渲染：JSP——快，但每次刷新页面
+* 浏览器渲染：js.ajax——首屏速度慢
+* 前后端同构，首屏服务端渲染
 
 ### react服务端渲染
 * yarn add babel-cli    //内含babel-node使nodejs兼容es6
@@ -223,7 +258,8 @@ import csshook from 'css-modules-require-hook/preset'
 import assethook from 'asset-require-hook'
 
 assethook({
-    extensions: ['png']
+    extensions: ['png'],
+    limit: 9000         //引入asset-require-hook来识别图片资源时候，默认对小于8K的图片转换成base64字符串，大于8k的图片转换成路径引用(路径引用会找不着资源)
 });
 ```
 * 将public/index.html中的html结构放到server.js中，使服务器渲染的页面有基础结构
@@ -236,6 +272,20 @@ import staticPath from '../build/asset-manifest.json'
 ```
 * 添加<meta name="keywords" content="React,Redux,Imooc,聊天,SSR">，搜索引擎优化seo
 
-# react16--renderToNodeStream
+### react16--renderToNodeStream
 * server.js中  将renderToString改为renderToNodeStream，以字符串形式改为以流的形式，渲染速度会快三倍
 * index.js中 ReactDOM.render改为ReactDOM.hydrate
+
+# 问题总结
+* 浏览器警告：Warning: Expected server HTML to contain a matching <div> in <div>
+```
+<!-- 可以忽略开发中的警告。这可能是因为我们正在使用reactDOM.hydrate()对DOM进行最初的反应，它希望我们首先从服务器接收到这些数据。由于只有浏览器的开发没有任何服务器输出，所以我们得到警告。 -->
+const root = document.getElementById('root')
+const renderOrHydrate = root.innerHTML.trim().length ? 'hydrate' : 'render'
+
+ReactDOM[renderOrHydrate](
+    。。。
+    , 
+    root
+);
+```

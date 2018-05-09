@@ -18,7 +18,8 @@ import {renderToString,renderToNodeStream} from 'react-dom/server'
 import staticPath from '../build/asset-manifest.json'
 
 assethook({
-    extensions: ['png']
+    extensions: ['png'],
+    limit: 9000
 });
 
 

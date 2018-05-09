@@ -13,12 +13,15 @@ const store = createStore(reducer, compose(
     window.devToolsExtension?window.devToolsExtension():f=>f
 ))
 
-ReactDOM.hydrate(
+const root = document.getElementById('root')
+const renderOrHydrate = root.innerHTML.trim().length ? 'hydrate' : 'render'
+
+ReactDOM[renderOrHydrate](
     (<Provider store={store}>
         <BrowserRouter>
             <App></App>
         </BrowserRouter>
     </Provider>)
     , 
-    document.getElementById('root')
+    root
 );

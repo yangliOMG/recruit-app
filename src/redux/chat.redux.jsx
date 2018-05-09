@@ -53,7 +53,7 @@ export function getMsgList(type){
 }
 export function readMsg(from){
     return async (dispatch,getState)=>{
-        const res = await axios.post('/user/readmsg',{from})
+        const res = await axios.post('/user/readmsg',{from})        ///!!!!!!!!!!!!!!async await
         if(res.status===200&&res.data.code===0){
             const userid = getState().user._id
             dispatch(msgRead(userid,from, res.data.num))
