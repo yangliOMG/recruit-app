@@ -270,14 +270,14 @@ import staticPath from '../build/asset-manifest.json'
 <Link rel="stylesheet" href="/${staticPath['main.css']}">
 <script src="/${staticPath['main.js']}"></script>
 ```
-* 添加<meta name="keywords" content="React,Redux,Imooc,聊天,SSR">，搜索引擎优化seo
+* 添加"<meta name="keywords" content="React,Redux,Imooc,聊天,SSR">"，搜索引擎优化seo
 
 ### react16--renderToNodeStream
 * server.js中  将renderToString改为renderToNodeStream，以字符串形式改为以流的形式，渲染速度会快三倍
 * index.js中 ReactDOM.render改为ReactDOM.hydrate
 
 # 问题总结
-* 浏览器警告：Warning: Expected server HTML to contain a matching <div> in <div>
+* 浏览器警告："Warning: Expected server HTML to contain a matching <div> in <div>"
 ```
 <!-- 可以忽略开发中的警告。这可能是因为我们正在使用reactDOM.hydrate()对DOM进行最初的反应，它希望我们首先从服务器接收到这些数据。由于只有浏览器的开发没有任何服务器输出，所以我们得到警告。 -->
 const root = document.getElementById('root')
@@ -288,4 +288,33 @@ ReactDOM[renderOrHydrate](
     , 
     root
 );
+```
+* 在windows中nginx服务器配置
+| 1.在conf下的nginx.conf中添加‘ include vhost/*.conf;’ 
+| 2.在conf/vhost下，添加app.conf
+```
+server {
+    listen 8082;
+    server_name app;
+    access_log logs/access.log combined;
+    index index.html index.jsp index.php;
+
+	root html/build;
+	index index.html;
+	
+    location ~*.do$ {
+        proxy_pass http://localhost:9093;
+    }
+	location / {
+		try_files $uri $uri/ /index.html;
+    }
+}
+```
+| 3.将项目中打包好的build文件夹放到nginx/html目录下
+* nginx在windows中的操作命令（在nginx目录下）：
+```
+start nginx 启动；
+nginx -t -c conf/nginx.conf 检查；
+nginx -s reload重启；
+nginx -s quit关闭
 ```

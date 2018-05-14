@@ -21,7 +21,7 @@ export function userList(data){
 }
 export function getUserList(type){
     return dispatch=>{
-        axios.get('/user/list?type='+type)
+        axios.get('/user/list.do?type='+type)
         .then(res=>{
             if(res.status===200&&res.data.code===0){
                 dispatch(userList(res.data.data))

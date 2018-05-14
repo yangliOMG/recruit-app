@@ -8,14 +8,14 @@ const Chat = model.getModel('chat')
 
 const _filter = {'pwd':0,"__v":0}
 
-Router.get('/list',function(req,res){
+Router.get('/list.do',function(req,res){
     // User.remove({},function(e,d){})
     const {type} = req.query
     User.find({type},function(err,doc){
         return res.json({code:0,data:doc})
     })
 })
-Router.get('/getmsglist',function(req,res){
+Router.get('/getmsglist.do',function(req,res){
     const user = req.cookies.userid
 
     User.find({},function(e,userdoc){
@@ -31,7 +31,7 @@ Router.get('/getmsglist',function(req,res){
     })
     
 })
-Router.post('/readmsg',function(req,res){
+Router.post('/readmsg.do',function(req,res){
     const userid = req.cookies.userid
     const {from} = req.body
     Chat.update({from,to:userid},{'$set':{read:true}},{'multi':true},function(err,doc){
@@ -41,7 +41,7 @@ Router.post('/readmsg',function(req,res){
         return res.json({code:1,msg:'修改失败'})
     })
 })
-Router.post('/update',function(req,res){
+Router.post('/update.do',function(req,res){
     const userid = req.cookies.userid
     if(!userid){
         return res.json({code:1})
@@ -55,7 +55,7 @@ Router.post('/update',function(req,res){
         return res.json({code:0,data})
     })
 })
-Router.post('/login',function(req,res){
+Router.post('/login.do',function(req,res){
     const {user, pwd}  = req.body
     User.findOne({user,pwd:md5Pwd(pwd)},_filter,function(err,doc){    //第一个是查询条件，第二个是显示条件，
         if(!doc){                                                       //{'pwd':0}=>不显示该字段
@@ -65,7 +65,7 @@ Router.post('/login',function(req,res){
         return res.json({code:0,data:doc})
     })
 })
-Router.post('/register',function(req,res){
+Router.post('/register.do',function(req,res){
     const {user, pwd, type}  = req.body
     User.findOne({user:user},function(err,doc){
         if(doc){
@@ -90,7 +90,7 @@ Router.post('/register',function(req,res){
         // })
     })
 })
-Router.get('/info',function(req,res){
+Router.get('/info.do',function(req,res){
     const {userid} = req.cookies
     if(!userid){
         return res.send({code:1})
