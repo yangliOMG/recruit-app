@@ -206,7 +206,7 @@ app.use('/',express.static(path.resolve('build')))
 * 前后端同构，首屏服务端渲染
 
 ### react服务端渲染
-* yarn add babel-cli    //内含babel-node使nodejs兼容es6
+* yarn add babel-cli    //内含babel-node   !!!!!!!!!!!!!!!使nodejs兼容es6!!!!!!!!!!!!!!!
 * 修改package.json
 ```
 "scripts": {

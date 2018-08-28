@@ -6,11 +6,19 @@ import QueueAnim from 'rc-queue-anim';
 
 
 import NavLinkBar from '../navlink/navlink'
+// import asyncComponent  from '../../component/loadable/loadable.jsx'
 import Boss from '../../component/boss/boss.jsx'
 import Genius from '../../component/genius/genius.jsx'
 import User from '../../component/user/user.jsx'
 import Msg from '../../component/msg/msg.jsx'
 import {getMsgList,recvMsg} from '../../redux/chat.redux.jsx'
+
+
+// const Boss = asyncComponent(() => import("../../component/boss/boss.jsx"));
+// const Genius = asyncComponent(() => import("../../component/genius/genius.jsx"));
+// const User = asyncComponent(() => import("../../component/user/user.jsx"));
+// const Msg = asyncComponent(() => import("../../component/msg/msg.jsx"));
+
 
 @connect(
     state=>state,

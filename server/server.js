@@ -46,10 +46,10 @@ const userRouter = require('./user')
 
 app.use(cookieParser())
 app.use(bodyParser.json())
-app.use('/user',userRouter) //开启中间键？？
+app.use('/user',userRouter)  
 app.use(function(req, res, next){   //把不是/user(接口)，不是/static(静态资源)，都映射到index.html
     if(req.url.startsWith('/user/') || req.url.startsWith('/static')){
-        return next()
+        return next()   //调用下一个中间件。
     }
     // return res.sendFile(path.resolve('build/index.html'))
 
