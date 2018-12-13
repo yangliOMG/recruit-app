@@ -1,0 +1,20 @@
+.css { border: .5px solid black; border-bottom-width: 4px; font-size: 14px; 
+    line-height: 20px; position: relative; }
+.ignore { margin: 10px; background-color: red; } 
+.box { width: 180px; height: 300vw;display: flex; 
+     .as{display: block;}
+}
+:root {
+    --heading-color: #ff0000;
+    --url: ../../component/logo;
+}
+
+@custom-selector :--headings .test;
+
+:--headings { 
+    color: var(--heading-color);
+}
+
+.asd {
+  background:url('var(--url)/job.png') 0 0 / 100% 100% ;
+}

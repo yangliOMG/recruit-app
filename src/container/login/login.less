@@ -1,0 +1,41 @@
+.less { border: .5px solid black; border-bottom-width: 4px; font-size: 14px; 
+    line-height: 20px; position: relative; }
+.ignore { margin: 10px; background-color: red; } 
+.box { width: 180px; height: 300vw;display: flex; 
+    .as{display: inline;}
+}
+:root {
+    --heading-color: #ff0000;
+}
+
+@custom-selector :--headings .test;
+
+:--headings { 
+    color: var(--heading-color);
+}
+
+@url:"../../component/logo";
+.asd {
+  background:url('@{url}/background.jpg') 0 0~"/" 100% 100% ;
+}
+
+.Function_mixin(@i){
+    -webkit-line-clamp: @i; 
+}
+.text-overflow2{ .Function_mixin(2); }  
+
+@0px:0px;         
+.Function-style(50);               
+.Function-style(@n, @i: 5) when (@i =< @n) {         
+      
+  .mt-@{i} { margin-top: @i + @0px; }       
+
+  .Function-style(@n, (@i + 5));           
+}
+
+@fzList: 0,12,14,15,16,18,20,22,24,26,28,30,50;
+.Function_fz(@fzList);
+.Function_fz(@fzList, @i: 1, @val:extract(@fzList, @i)) when (@i =< length(@fzList, @i)) {            
+    .f-@{val} { font-size: @val+@0px; }
+    .Function_fz(@fzList, (@i + 1));
+}

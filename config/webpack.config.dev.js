@@ -1,6 +1,6 @@
 'use strict';
 
-const autoprefixer = require('autoprefixer');
+// const autoprefixer = require('autoprefixer');
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -157,7 +157,7 @@ module.exports = {
           // In production, we use a plugin to extract that CSS to a file, but
           // in development "style" loader enables hot editing of CSS.
           {
-            test: /\.css$/,
+            test: /\.(css|less|scss)$/,
             use: [
               require.resolve('style-loader'),
               {
@@ -171,21 +171,46 @@ module.exports = {
                 options: {
                   // Necessary for external CSS imports to work
                   // https://github.com/facebookincubator/create-react-app/issues/2677
+                  // config: {
+                  //   path: 'postcss.config.js'  // 这个得在项目根目录创建此文件
+                  // },
                   ident: 'postcss',
                   plugins: () => [
                     require('postcss-flexbugs-fixes'),
-                    autoprefixer({
-                      browsers: [
-                        '>1%',
-                        'last 4 versions',
-                        'Firefox ESR',
-                        'not ie < 9', // React doesn't support IE8 anyway
+                    require("postcss-cssnext")({
+                        browsers: [
+                          '>1%',
+                          'last 4 versions',
+                          'Firefox ESR',
+                          'not ie < 9', // React doesn't support IE8 anyway
+                          'ios >= 7.0',
                       ],
-                      flexbox: 'no-2009',
                     }),
+                    // require("postcss-aspect-ratio-mini"),          //主要用来处理元素容器宽高比
+                    // require("postcss-write-svg")({ utf8: false }),   //主要用来处理移动端1px的解决方案。
+                    // require("postcss-px-to-viewport")({      //主要用来把px单位转换为vw、vh
+                    //     viewportWidth: 750,
+                    //     viewportHeight: 1334,
+                    //     unitPrecision: 3,
+                    //     viewportUnit: 'vw',
+                    //     selectorBlackList: ['.ignore', '.hairlines'],
+                    //     minPixelValue: 1,
+                    //     mediaQuery: false
+                    // }),
+                    // require("cssnano")({        //用来压缩和清理CSS代码
+                    //     preset: "advanced",
+                    //     autoprefixer: false,
+                    //     "postcss-zindex": false
+                    // })
                   ],
                 },
               },
+              // {
+              //   loader: require.resolve('less-loader'), 
+              // },
+              {
+                loader: require.resolve('sass-loader'), 
+              }
             ],
           },
           // "file" loader makes sure those assets get served by WebpackDevServer.

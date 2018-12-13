@@ -7,6 +7,10 @@ import {Redirect} from 'react-router-dom'
 import {login} from '../../redux/user.redux'
 import imoocForm from '../../component/imooc-form/imooc-form.jsx'
 
+import './login.css';
+// import './login.less';
+// import './login.scss';
+
 @connect(
     state=>state.user,
     {login}
@@ -36,6 +40,9 @@ class Login extends React.Component{
             <div>
                 {(this.props.redirectTo&&this.props.redirectTo!=='/login')? <Redirect to={this.props.redirectTo}/> : null}
                 <Logo></Logo>
+                {/* <div className="test box post">test
+                    <div className="as"></div>
+                </div> */}
                 <WingBlank>
                     <List>
                         {this.props.msg?
@@ -44,7 +51,6 @@ class Login extends React.Component{
                         <InputItem 
                             onChange={v=>this.props.handleChange('user',v)}
                         >用户</InputItem>
-                        <WhiteSpace/>
                         <InputItem type="password"
                             onChange={v=>this.props.handleChange('pwd',v)}
                         >密码</InputItem>
