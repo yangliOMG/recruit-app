@@ -318,3 +318,4 @@ nginx -t -c conf/nginx.conf 检查；
 nginx -s reload重启；
 nginx -s quit关闭
 ```
+
