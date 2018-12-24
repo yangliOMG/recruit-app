@@ -55,7 +55,8 @@ export function update(data){
 }
 export function login({user,pwd}){
     if(!user||!pwd){
-        return errorMsg('用户名密码必须输入')
+        return dispatch => dispatch(errorMsg('用户名密码必须输入'))
+        // return errorMsg('用户名密码必须输入')
     }
     return dispatch=>{
         axios.post('/user/login.do',{user,pwd})

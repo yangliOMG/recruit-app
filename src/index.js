@@ -17,11 +17,13 @@ const root = document.getElementById('root')
 const renderOrHydrate = root.innerHTML.trim().length ? 'hydrate' : 'render'
 
 ReactDOM[renderOrHydrate](
-    (<Provider store={store}>
+    (
+    // <Provider store={store}>
         <BrowserRouter>
             <App></App>
         </BrowserRouter>
-    </Provider>)
+    // </Provider> 
+    )
     , 
     root
 );
