@@ -1,10 +1,10 @@
 import React from 'react'
 import Logo from '../../component/logo/logo.jsx'
 import {List, InputItem, WingBlank, WhiteSpace, Button} from 'antd-mobile'
-// import {connect} from 'react-redux'
+import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 
-// import {login} from '../../redux/user.redux'
+import {login} from '../../redux/user.redux'
 import imoocForm from '../../component/imooc-form/imooc-form.jsx'
 import CounterDisplay from '../test/CounterDisplay'
 
@@ -18,7 +18,13 @@ import './login.css';
 //     state=>state.user,
 //     {login}
 // )
-@imoocForm
+@connect(({ test }) => {
+    const { msg } = test;
+    return {
+        msg,
+    };
+})
+// @imoocForm
 class Login extends React.Component{
     constructor(props){
         super(props);
@@ -43,7 +49,12 @@ class Login extends React.Component{
         // })
     }
     handleLogin(){
-        this.props.login(this.props.state)
+        // this.props.login(this.props.state)
+        const { dispatch } = this.props;
+        dispatch({
+            type: 'ERROR_MSG',
+            msg:'用户名密码必须输入'
+        })
     }
     
     render(){
@@ -81,7 +92,7 @@ class Login extends React.Component{
                 <div>
                     {(this.props.redirectTo&&this.props.redirectTo!=='/login')? <Redirect to={this.props.redirectTo}/> : null}
                     <Logo></Logo>
-                    <CounterDisplay/>
+                    {/* <CounterDisplay/> */}
                     {/* <div className="test box post">test
                         <div className="as"></div>
                     </div> */}

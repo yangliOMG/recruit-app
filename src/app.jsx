@@ -51,17 +51,17 @@ class App extends React.Component{
         :(
             <div>
                 {/* <AuthRoute></AuthRoute> */}
-                <Provider value={this.state.counter}>
+                {/* <Provider value={this.state.counter}> */}
                     <Switch>
                         <Route  path='/bossinfo' component={Bossinfo}></Route>
                         <Route  path='/geniusinfo' component={Geniusinfo}></Route>
                         <Route  path='/login' component={Login}></Route>
                         <Route  path='/register' component={Register}></Route>
-                        <Route  path='/counter' component={Counter}></Route>
+                        {/* <Route  path='/counter' component={Counter}></Route> */}
                         <Route  path='/chat/:user' component={Chat}></Route>
                         <Route component={Dashboard}></Route>
                     </Switch>
-                </Provider>
+                {/* </Provider> */}
             </div>
         )
     }
