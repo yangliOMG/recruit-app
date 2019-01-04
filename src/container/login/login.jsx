@@ -18,13 +18,14 @@ import './login.css';
 //     state=>state.user,
 //     {login}
 // )
-@connect(({ test }) => {
-    const { msg } = test;
-    return {
-        msg,
-    };
-})
-// @imoocForm
+@connect(({ testState }) => ({
+        msg:testState.msg
+    }),
+    // (dispatch) => ({                 //写法二
+    //     fetchPosts: (state) => dispatch({ type: 'TO_LOGIN_IN', payload: state })
+    // })
+)
+@imoocForm
 class Login extends React.Component{
     constructor(props){
         super(props);
@@ -50,11 +51,13 @@ class Login extends React.Component{
     }
     handleLogin(){
         // this.props.login(this.props.state)
-        const { dispatch } = this.props;
+        const { dispatch, state } = this.props;
         dispatch({
-            type: 'ERROR_MSG',
-            msg:'用户名密码必须输入'
+            type: 'TO_LOGIN_IN',
+            payload: state
         })
+        // const { fetchPosts, state} = this.props          //写法二
+        // fetchPosts(state)
     }
     
     render(){

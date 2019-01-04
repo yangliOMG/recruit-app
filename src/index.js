@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import {BrowserRouter} from 'react-router-dom';
 import App from './app.jsx'
 import reducer from './reducer.jsx'
+import {rootSaga} from './redux/saga'
 import './index.css'
 const sagaMiddleware = createSagaMiddleware()
 
@@ -19,6 +20,7 @@ const store = createStore(reducer,
     //     window.devToolsExtension?window.devToolsExtension():f=>f
     // )
 )
+sagaMiddleware.run(rootSaga)
 
 const root = document.getElementById('root')
 const renderOrHydrate = root.innerHTML.trim().length ? 'hydrate' : 'render'
