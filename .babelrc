@@ -3,6 +3,7 @@
       "react-app"
     ],
     "plugins": [
+      ["emotion"],
       [
         "import",
         {

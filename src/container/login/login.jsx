@@ -21,9 +21,10 @@ import './login.css';
 @connect(({ testState }) => ({
         msg:testState.msg
     }),
-    // (dispatch) => ({                 //写法二
-    //     fetchPosts: (state) => dispatch({ type: 'TO_LOGIN_IN', payload: state })
-    // })
+    (dispatch) => ({                 //写法二
+        fetchPosts: (state) => dispatch({ type: 'TO_LOGIN_IN', payload: state }),
+        fetchlists: (state) => dispatch({ type: 'TO_LIST', payload: state })
+    })
 )
 @imoocForm
 class Login extends React.Component{
@@ -51,11 +52,9 @@ class Login extends React.Component{
     }
     handleLogin(){
         // this.props.login(this.props.state)
-        const { dispatch, state } = this.props;
-        dispatch({
-            type: 'TO_LOGIN_IN',
-            payload: state
-        })
+        const { fetchPosts, fetchlists, state } = this.props;
+        fetchPosts(state)
+        fetchlists(state)
         // const { fetchPosts, state} = this.props          //写法二
         // fetchPosts(state)
     }

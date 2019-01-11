@@ -7,7 +7,6 @@ const initState = {
     type:''
 }
 export function testState(state=initState, action){
-    console.log("testState",action)
     switch(action.type){
         case ERROR_MSG:
             return {...state,msg:action.msg }
