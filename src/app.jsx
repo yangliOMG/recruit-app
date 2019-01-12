@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Switch} from 'react-router-dom';
 
-// import Login from './container/login/login.jsx';
+import Login from './container/login/login.jsx';
 import Hook from './container/login/hook';
 import Suspense from './container/login/suspense';
 import Emotion from './container/login/emotion';
@@ -58,7 +58,7 @@ class App extends React.Component{
                     <Switch>
                         <Route  path='/bossinfo' component={Bossinfo}></Route>
                         <Route  path='/geniusinfo' component={Geniusinfo}></Route>
-                        {/* <Route  path='/login' component={Login}></Route> */}
+                        <Route  path='/login' component={Login}></Route>
                         <Route  path='/hook' component={Hook}></Route>
                         <Route  path='/suspense' component={Suspense}></Route>
                         <Route  path='/emotion' component={Emotion}></Route>

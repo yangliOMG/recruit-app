@@ -56,6 +56,7 @@ Router.post('/update.do',function(req,res){
 })
 Router.post('/login.do',function(req,res){
     const {user, pwd}  = req.body
+    console.log(user,pwd)
     User.findOne({user,pwd:md5Pwd(pwd)},_filter,function(err,doc){    //第一个是查询条件，第二个是显示条件，
         if(!doc){                                                       //{'pwd':0}=>不显示该字段
             return res.json({code:1,msg:'用户名不存在或密码存在'})

@@ -79,6 +79,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "server": "set NODE_ENV=test&&nodemon --exec babel-node server/server.js",
+    "server2": "set NODE_ENV=test&&nodemon --exec babel-node server/server2.js",
     "server_bak": "nodemon server/server.js",
     "test": "node scripts/test.js --env=jsdom"
   },

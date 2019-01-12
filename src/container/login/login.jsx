@@ -6,7 +6,7 @@ import {Redirect} from 'react-router-dom'
 
 import {login} from '../../redux/user.redux'
 import imoocForm from '../../component/imooc-form/imooc-form.jsx'
-import CounterDisplay from '../test/CounterDisplay'
+// import CounterDisplay from '../test/CounterDisplay'
 
 // import { Observable, of, from, fromEvent, Subject, Scheduler, AsyncSubject, } from 'rxjs'
 // import { mapTo, scan, throttleTime  } from 'rxjs/operators'
@@ -14,18 +14,18 @@ import './login.css';
 // import './login.less';
 // import './login.scss';
 
-// @connect(
-//     state=>state.user,
-//     {login}
-// )
-@connect(({ testState }) => ({
-        msg:testState.msg
-    }),
-    (dispatch) => ({                 //写法二
-        fetchPosts: (state) => dispatch({ type: 'TO_LOGIN_IN', payload: state }),
-        fetchlists: (state) => dispatch({ type: 'TO_LIST', payload: state })
-    })
+@connect(
+    state=>state.user,
+    {login}
 )
+// @connect(({ testState }) => ({
+//         msg:testState.msg
+//     }),
+//     (dispatch) => ({                 //写法二
+//         fetchPosts: (state) => dispatch({ type: 'TO_LOGIN_IN', payload: state }),
+//         fetchlists: (state) => dispatch({ type: 'TO_LIST', payload: state })
+//     })
+// )
 @imoocForm
 class Login extends React.Component{
     constructor(props){
@@ -51,10 +51,10 @@ class Login extends React.Component{
         // })
     }
     handleLogin(){
-        // this.props.login(this.props.state)
-        const { fetchPosts, fetchlists, state } = this.props;
-        fetchPosts(state)
-        fetchlists(state)
+        this.props.login(this.props.state)
+        // const { fetchPosts, fetchlists, state } = this.props;
+        // fetchPosts(state)
+        // fetchlists(state)
         // const { fetchPosts, state} = this.props          //写法二
         // fetchPosts(state)
     }
