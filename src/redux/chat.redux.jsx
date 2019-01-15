@@ -1,7 +1,7 @@
 import axios from "axios";
-import io from 'socket.io-client'
+// import io from 'socket.io-client'
 
-const socket = io('ws://localhost:9093')
+// const socket = io('ws://localhost:9093')
 
 
 const MSG_LIST = 'MSG_LIST'
@@ -33,9 +33,9 @@ export function chat(state=initState, action){
 function msgList(msgs,users,userid){
     return {type:MSG_LIST, payload:{msgs,users,userid}}
 }
-function msgRecv(msg,userid){
-    return {userid,type:MSG_RECV, payload:msg}
-}
+// function msgRecv(msg,userid){
+//     return {userid,type:MSG_RECV, payload:msg}
+// }
 function msgRead(from,userid,num){
     return {type:MSG_READ, payload:{from,userid,num}}
 }
@@ -71,14 +71,14 @@ export function readMsg(from){
 }
 export function recvMsg(){
     return (dispatch,getState)=>{
-        socket.on('recvmsg',function(data){
-            const userid = getState().user._id
-            dispatch(msgRecv(data, userid))
-        })
+        // socket.on('recvmsg',function(data){
+        //     const userid = getState().user._id
+        //     dispatch(msgRecv(data, userid))
+        // })
     }
 }
 export function sendMsg({from,to,msg}){
     return dispatch=>{
-        socket.emit('sendmsg',{from,to, msg})
+        // socket.emit('sendmsg',{from,to, msg})
     }
 }

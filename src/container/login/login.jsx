@@ -13,6 +13,7 @@ import imoocForm from '../../component/imooc-form/imooc-form.jsx'
 import './login.css';
 // import './login.less';
 // import './login.scss';
+import * as R from 'ramda'
 
 @connect(
     state=>state.user,
@@ -39,6 +40,11 @@ class Login extends React.Component{
         // ).subscribe(x => 
         //     this.setState({ count: x })
         // )
+    }
+    componentDidMount(){
+        console.log(
+            R.splitEvery(2)([{id:1}, {id:2}, {id:3}, {id:4}, {id:5}, {id:6}, {id:7}])
+            )
     }
     register(){
         this.props.history.push('/counter');
