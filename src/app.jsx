@@ -2,15 +2,15 @@ import React from 'react'
 import { Route, Switch} from 'react-router-dom';
 
 import Login from './container/login/login.jsx';
-import Hook from './container/login/hook';
-import Suspense from './container/login/suspense';
-import Emotion from './container/login/emotion';
-import Register from './container/register/register.jsx';
-import Bossinfo from './container/bossinfo/bossinfo.jsx';
-import Geniusinfo from './container/geniusinfo/geniusinfo.jsx';
-// import AuthRoute from './component/authroute/authroute.jsx';
-import Dashboard from './component/dashboard/dashboard.jsx';
-import Chat from './component/chat/chat.jsx';
+// import Hook from './container/login/hook';
+// import Suspense from './container/login/suspense';
+// import Emotion from './container/login/emotion';
+// import Register from './container/register/register.jsx';
+// import Bossinfo from './container/bossinfo/bossinfo.jsx';
+// import Geniusinfo from './container/geniusinfo/geniusinfo.jsx';
+// // import AuthRoute from './component/authroute/authroute.jsx';
+// import Dashboard from './component/dashboard/dashboard.jsx';
+// import Chat from './component/chat/chat.jsx';
 
 // import Counter from './container/test/Counter';
 // import { Provider} from './container/test/context'
@@ -56,16 +56,16 @@ class App extends React.Component{
                 {/* <AuthRoute></AuthRoute> */}
                 {/* <Provider value={this.state.counter}> */}
                     <Switch>
-                        <Route  path='/bossinfo' component={Bossinfo}></Route>
-                        <Route  path='/geniusinfo' component={Geniusinfo}></Route>
+                        {/* <Route  path='/bossinfo' component={Bossinfo}></Route>
+                        <Route  path='/geniusinfo' component={Geniusinfo}></Route> */}
                         <Route  path='/login' component={Login}></Route>
-                        <Route  path='/hook' component={Hook}></Route>
+                        {/* <Route  path='/hook' component={Hook}></Route>
                         <Route  path='/suspense' component={Suspense}></Route>
                         <Route  path='/emotion' component={Emotion}></Route>
-                        <Route  path='/register' component={Register}></Route>
+                        <Route  path='/register' component={Register}></Route> */}
                         {/* <Route  path='/counter' component={Counter}></Route> */}
-                        <Route  path='/chat/:user' component={Chat}></Route>
-                        <Route component={Dashboard}></Route>
+                        {/* <Route  path='/chat/:user' component={Chat}></Route>
+                        <Route component={Dashboard}></Route> */}
                     </Switch>
                 {/* </Provider> */}
             </div>

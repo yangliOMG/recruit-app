@@ -5,7 +5,7 @@ import {Redirect} from 'react-router-dom'
 
 import {regisger} from '../../redux/user.redux.jsx'
 import Logo from '../../component/logo/logo.jsx'
-import imoocForm from '../../component/imooc-form/imooc-form.jsx'
+import imoocForm from '../../component/imooc-form/imooc-form.tsx'
 
 @connect(
     state=>state.user,

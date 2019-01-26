@@ -5,15 +5,15 @@ import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 
 import {login} from '../../redux/user.redux'
-import imoocForm from '../../component/imooc-form/imooc-form.jsx'
+import imoocForm from '../../component/imooc-form/imooc-form'
 // import CounterDisplay from '../test/CounterDisplay'
 
-// import { Observable, of, from, fromEvent, Subject, Scheduler, AsyncSubject, } from 'rxjs'
-// import { mapTo, scan, throttleTime  } from 'rxjs/operators'
+import { Observable, of, from, fromEvent, Subject, Scheduler, AsyncSubject, } from 'rxjs'
+import { mapTo, scan, throttleTime, concatMap, switchMap, mergeMap  } from 'rxjs/operators'
 import './login.css';
 // import './login.less';
 // import './login.scss';
-import * as R from 'ramda'
+// import * as R from 'ramda'
 
 @connect(
     state=>state.user,
@@ -41,11 +41,6 @@ class Login extends React.Component{
         //     this.setState({ count: x })
         // )
     }
-    componentDidMount(){
-        console.log(
-            R.splitEvery(2)([{id:1}, {id:2}, {id:3}, {id:4}, {id:5}, {id:6}, {id:7}])
-            )
-    }
     register(){
         this.props.history.push('/counter');
         // this.setState({count:this.state.count+1})
@@ -64,24 +59,21 @@ class Login extends React.Component{
         // const { fetchPosts, state} = this.props          //写法二
         // fetchPosts(state)
     }
-    
-    render(){
-        // var observable = 
-        //     // Observable.create(function(observer) {
-        //     //     observer.next('Jerry'); 
-        //     //     observer.next('Anna');observer.complete();
-        //     //     observer.error(observer)
-        //     //     setTimeout(() => {
-        //     //         observer.next('RxJS 30 days!');
-        //     //     }, 1)
-        //     // })
-        //     // from(['Jerry', 'Anna' ])
+    componentDidMount(){
+        var observable = 
+            // Observable.create(function(observer) {
+            //     observer.next('Jerry'); 
+            //     setTimeout(() => {
+            //         observer.next('RxJS 30 days!');
+            //     }, 1)
+            // })
+            // from(['Jerry', 'Anna' ])
         //     // of('Jerry', 'Anna')
         //     // fromEvent(document.body, 'click')
-        //     new Subject()
-        // console.log("start")
+            // new Subject()
+        console.log("start")
         // // 订阅 observable  
-        // observable.next(222)
+        // observable.next(222,111)
         // observable.subscribe( {
         //     next: function(value) {
         //         console.log(value);
@@ -93,9 +85,19 @@ class Login extends React.Component{
         //         console.log('complete')
         //     }
         // })
-        // observable.next(1222)
+        // observable.next(1222,1111)
         // from(['Jerry', 'Anna' ]).subscribe(observable)
-        // console.log("end");
+        //-------异步一维化  concatMap switchMap mergeMap
+        function getPostData() {
+            return fetch('https://jsonplaceholder.typicode.com/posts/1')
+            .then(res => res.json())
+        }
+        fromEvent(document.body, 'click').pipe(
+            concatMap( e => from(getPostData()))
+        ).subscribe(value => console.log(value));
+        console.log("end");
+    }
+    render(){
         return (
                 <div>
                     {(this.props.redirectTo&&this.props.redirectTo!=='/login')? <Redirect to={this.props.redirectTo}/> : null}

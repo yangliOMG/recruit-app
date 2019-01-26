@@ -30,8 +30,8 @@ ReactDOM[renderOrHydrate](
     <Provider store={store}>
         <BrowserRouter>
             <App></App>
-        </BrowserRouter>
-    </Provider> 
+         </BrowserRouter>
+     </Provider> 
     )
     , 
     root
